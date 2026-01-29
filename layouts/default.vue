@@ -1,15 +1,22 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
-<header>
-  header
-</header>
-  <slot></slot>
-  <footer>footer</footer>
+  <div>
+    <slot />
+  </div>
 </template>
 
-<style scoped>
+<script setup>
+useHead({
+  script: [
+    {
+      src: "https://identity.netlify.com/v1/netlify-identity-widget.js",
+      defer: true
+    }
+  ]
+})
 
-</style>
+if (process.client) {
+  window.netlifyIdentity?.on("login", () => {
+    window.location.href = "/admin/";
+  })
+}
+</script>
