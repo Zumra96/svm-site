@@ -1,43 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="utf-8" />
     <title>Uređivanje sadržaja</title>
+
+    <!-- Netlify Identity widget -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
 <!-- Decap CMS -->
 <script src="https://unpkg.com/decap-cms@latest/dist/decap-cms.js"></script>
 
 <script>
-    // Configure Decap CMS Auth0 backend
-    window.CMS_MANUAL_INIT = true;
-
-    DecapCMS.init({
-        config: {
-            backend: {
-                name: "auth0",
-                auth0_domain: "dev-cm8742hgumkgiavt.us.auth0.com",
-                auth0_client_id: "kQxVL3qaMEy1rpRPvhpRnQVQOncsWXO1",
-                auth0_callback_url: "https://svm-site.netlify.app/admin/callback"
-            },
-            media_folder: "public/uploads",
-            public_folder: "/uploads",
-            collections: [
-                {
-                    name: "news",
-                    label: "Obavijesti",
-                    folder: "content/news",
-                    create: true,
-                    slug: "{{year}}-{{month}}-{{day}}-{{slug}}",
-                    fields: [
-                        { label: "Naslov", name: "title", widget: "string" },
-                        { label: "Datum", name: "date", widget: "datetime" },
-                        { label: "Sadržaj", name: "body", widget: "markdown" }
-                    ]
-                }
-            ]
-        }
-    });
+    if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+            if (!user) {
+                window.netlifyIdentity.on("login", () => {
+                    document.location.href = "/admin/";
+                });
+            }
+        });
+    }
 </script>
 </body>
 </html>
