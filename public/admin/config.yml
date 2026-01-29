@@ -1,11 +1,9 @@
 backend:
-  name: auth0
-  auth0_domain: "dev-cm8742hgumkgiavt.us.auth0.com"
-  auth0_client_id: "kQxVL3qaMEy1rpRPvhpRnQVQOncsWXO1"
-  auth0_callback_url: "https://svm-site.netlify.app/admin/callback"
+  name: git-gateway       # Use Netlify Identity + Git Gateway
+  branch: main            # The branch where content will be committed
 
-media_folder: "public/uploads"
-public_folder: "/uploads"
+media_folder: "public/uploads"   # Folder where uploaded files will be stored
+public_folder: "/uploads"        # Public URL path for uploaded files
 
 collections:
   - name: "news"
@@ -17,3 +15,5 @@ collections:
       - { label: "Naslov", name: "title", widget: "string" }
       - { label: "Datum", name: "date", widget: "datetime" }
       - { label: "Sadržaj", name: "body", widget: "markdown" }
+
+publish_mode: editorial_workflow
