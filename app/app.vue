@@ -8,10 +8,6 @@ useHead({
   ]
 })
 </script>
-
-<template>
-  <NuxtPage />
-</template>
 <template>
   <div>
     <h1>Župa – web stranica</h1>
