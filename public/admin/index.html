@@ -1,10 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <title>Uređivanje sadržaja</title>
 </head>
 <body>
+<!-- Decap CMS -->
 <script src="https://unpkg.com/decap-cms@latest/dist/decap-cms.js"></script>
+
+<script>
+    // Configure Decap CMS Auth0 backend
+    window.CMS_MANUAL_INIT = true;
+
+    DecapCMS.init({
+        config: {
+            backend: {
+                name: "auth0",
+                auth0_domain: "dev-cm8742hgumkgiavt.us.auth0.com",
+                auth0_client_id: "kQxVL3qaMEy1rpRPvhpRnQVQOncsWXO1",
+                auth0_callback_url: "https://svm-site.netlify.app/admin/callback"
+            },
+            media_folder: "public/uploads",
+            public_folder: "/uploads",
+            collections: [
+                {
+                    name: "news",
+                    label: "Obavijesti",
+                    folder: "content/news",
+                    create: true,
+                    slug: "{{year}}-{{month}}-{{day}}-{{slug}}",
+                    fields: [
+                        { label: "Naslov", name: "title", widget: "string" },
+                        { label: "Datum", name: "date", widget: "datetime" },
+                        { label: "Sadržaj", name: "body", widget: "markdown" }
+                    ]
+                }
+            ]
+        }
+    });
+</script>
 </body>
 </html>
