@@ -12,8 +12,47 @@ collections:
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
+      - label: "Naslov"
+        name: "title"
+        widget: "string"
+      - label: "Datum"
+        name: "date"
+        widget: "datetime"
+      - label: "Sadržaj"
+        name: "body"
+        widget: "markdown"
+
+  - name: "masses"
+    label: "Raspored misa"
+    files:
+      - name: "weekly"
+        label: "Tjedni raspored"
+        file: "content/masses/weekly.yml"
+        fields:
+          - label: "Nedjelja"
+            name: "sunday"
+            widget: "string"
+          - label: "Radni dan"
+            name: "weekday"
+            widget: "string"
+          - label: "Blagdani"
+            name: "feasts"
+            widget: "string"
+            required: false
+          - label: "Napomena"
+            name: "note"
+            widget: "text"
+            required: false
+  - name: "news"
+    label: "Novosti"
+    folder: "content/news"
+    create: true
+    slug: "{{slug}}"
+    fields:
       - { label: "Naslov", name: "title", widget: "string" }
-      - { label: "Datum", name: "date", widget: "datetime" }
+      - { label: "Datum", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
+      - { label: "Kratki opis", name: "excerpt", widget: "text" }
       - { label: "Sadržaj", name: "body", widget: "markdown" }
+      - { label: "Slika", name: "image", widget: "image" }
 
 publish_mode: editorial_workflow

@@ -9,8 +9,7 @@ useHead({
 })
 </script>
 <template>
-  <div>
-    <h1>Župa – web stranica</h1>
-    <p>Radi.</p>
-  </div>
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>

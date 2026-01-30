@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+:root {
+    --green: #2F4F3E;
+    --cream: #FAF9F6;
+    --gold: #D6C9A3;
+    --text: #333333;
+    --font-heading: 'Merriweather', serif;
+    --font-body: 'Open Sans', sans-serif;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-body);
+    background: var(--cream);
+    color: var(--text);
+}
+
+h1, h2, h3 {
+    font-family: var(--font-heading);
+    color: var(--green);
+}
+
+a {
+    color: var(--green);
+    text-decoration: none;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+
+
+@media (max-width: 768px) {
+    .overlay h1 {
+        font-size: 2rem;
+    }
+
+    .grid {
+        margin-top: 0;
+        gap: 1rem;
+    }
+
+    .card {
+        padding: 1rem;
+    }
+}
