@@ -7,6 +7,9 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'static'
   },
+  app: {
+    pageTransition: { name: 'page', mode: 'out-in' }
+  },
   vite:{
     plugins: [
       tailwindcss(),

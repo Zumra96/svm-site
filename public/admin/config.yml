@@ -11,32 +11,80 @@ collections:
     files:
       - name: "weekly"
         label: "Tjedni raspored"
-        file: "content/masses/weekly.yml"
+        file: "content/masses/weekly.md"
         fields:
           - label: "Nedjelja"
             name: "sunday"
             widget: "string"
+            default: "08:00 · 10:30 · 18:30"
           - label: "Radni dan"
             name: "weekday"
             widget: "string"
+            default: "18:00"
           - label: "Blagdani"
             name: "feasts"
             widget: "string"
             required: false
+            default: "09:00 · 11:00"
           - label: "Napomena"
             name: "note"
             widget: "text"
             required: false
+            default: "Uvijek provjerite tjedne obavijesti za eventualne promjene."
   - name: "news"
     label: "Novosti"
     folder: "content/news"
     create: true
-    slug: "{{slug}}"
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    editor:
+      preview: true
     fields:
-      - { label: "Naslov", name: "title", widget: "string" }
-      - { label: "Datum", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
-      - { label: "Kratki opis", name: "excerpt", widget: "text" }
-      - { label: "Sadržaj", name: "body", widget: "markdown" }
-      - { label: "Slika", name: "image", widget: "image" }
+      - label: "Naslov"
+        name: "title"
+        widget: "string"
+      - label: "Datum"
+        name: "date"
+        widget: "datetime"
+        format: "YYYY-MM-DD"
+        date_format: "YYYY-MM-DD"
+        time_format: false
+      - label: "Kratki opis"
+        name: "excerpt"
+        widget: "text"
+        required: true
+      - label: "Sadržaj"
+        name: "body"
+        widget: "markdown"
+        required: true
+
+  - name: "gallery"
+    label: "Galerija"
+    folder: "content/gallery"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - label: "Naslov"
+        name: "title"
+        widget: "string"
+      - label: "Kategorija"
+        name: "category"
+        widget: "string"
+        default: "Događaj"
+      - label: "Datum"
+        name: "date"
+        widget: "datetime"
+        format: "YYYY-MM-DD"
+        date_format: "YYYY-MM-DD"
+        time_format: false
+      - label: "Slika"
+        name: "image"
+        widget: "image"
+        required: true
+      - label: "Opis"
+        name: "description"
+        widget: "text"
+        required: false
 
 publish_mode: editorial_workflow
