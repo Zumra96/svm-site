@@ -7,7 +7,7 @@ export default defineContentConfig({
             source: 'news/*.md'
         }),
         masses: defineCollection({
-            type: 'data',
+            type: 'page',
             source: 'masses/*.md'
         }),
         gallery: defineCollection({

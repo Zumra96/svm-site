@@ -28,14 +28,12 @@
 <script setup>
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { useAsyncData } from '#app'
 
 const route = useRoute()
 
-const { data: news } = await useAsyncData(`news-${route.path}`, () =>
-  queryCollection('news').where('path', '=', route.path).first()
+const { data: post } = await useAsyncData(`news-${route.path}`, () =>
+  queryContent('news').where('_path', route.path).findOne()
 )
-const post = computed(() => news.value)
 
 const formattedDate = computed(() =>
   post.value?.date

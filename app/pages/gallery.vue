@@ -18,15 +18,15 @@
       >
         <div class="overflow-hidden">
           <img
-            :src="item.image"
-            :alt="item.title"
+            :src="item.meta.image"
+            :alt="item.meta.title"
             class="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-110"
           />
         </div>
         <div class="p-5">
-          <p class="text-xs uppercase tracking-[0.3em] text-[#c9a586]">{{ item.category || 'Događaj' }}</p>
-          <h3 class="text-lg font-semibold mt-2 text-[#3d3935] transition-colors duration-300 group-hover:text-[#4a5f54]">{{ item.title }}</h3>
-          <p v-if="item.description" class="text-sm text-[#5a534e] mt-2">{{ item.description }}</p>
+          <p class="text-xs uppercase tracking-[0.3em] text-[#c9a586]">{{ item.meta.category || 'Događaj' }}</p>
+          <h3 class="text-lg font-semibold mt-2 text-[#3d3935] transition-colors duration-300 group-hover:text-[#4a5f54]">{{ item.meta.title }}</h3>
+          <p v-if="item.meta.description" class="text-sm text-[#5a534e] mt-2">{{ item.meta.description }}</p>
         </div>
       </div>
     </div>
@@ -38,9 +38,8 @@
 </template>
 
 <script setup>
-import { useAsyncData } from '#app'
-
 const { data: gallery } = await useAsyncData('gallery', () =>
-  queryCollection('gallery').order('date', 'DESC').all()
+  queryCollection('gallery').all()
 )
+console.log('gallery', gallery.value)
 </script>

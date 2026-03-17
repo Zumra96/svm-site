@@ -15,7 +15,7 @@
           day="Nedjelja"
           highlight
           :masses="[
-            { time: weekly?.sunday || '—', note: 'Glavne nedjeljne mise' }
+            { time: weekly?.meta.sunday || '—', note: 'Glavne nedjeljne mise' }
           ]"
         />
       </div>
@@ -23,7 +23,7 @@
         <MassDay
           day="Radni dan"
           :masses="[
-            { time: weekly?.weekday || '—', note: 'Sveta misa u župi' }
+            { time: weekly?.meta.weekday || '—', note: 'Sveta misa u župi' }
           ]"
         />
       </div>
@@ -31,7 +31,7 @@
         <MassDay
           day="Blagdani"
           :masses="[
-            { time: weekly?.feasts || 'Po najavi', note: 'Blagdanske mise' }
+            { time: weekly?.meta.feasts || 'Po najavi', note: 'Blagdanske mise' }
           ]"
         />
       </div>
@@ -40,7 +40,7 @@
     <div class="mt-12 glass-panel rounded-2xl p-8 scale-in stagger-4">
       <h2 class="text-2xl font-semibold section-title">Napomena</h2>
       <p class="text-[#5a534e] mt-3">
-        {{ weekly?.note || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis aliquam metus.' }}
+        {{ weekly?.meta.note || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quis aliquam metus.' }}
       </p>
     </div>
 
@@ -67,9 +67,12 @@
 
 <script setup>
 import MassDay from '~/components/MassDay.vue'
-import { useAsyncData } from '#app'
 
-const { data: weekly } = await useAsyncData('masses-weekly', () =>
-  queryCollection('masses').first()
-)
+const { data: weekly, error } = await useAsyncData(async () => {
+  return await queryCollection('masses')
+      .first()
+})
+
+console.log('weekly', weekly.value)
+console.log('error', error.value)
 </script>
